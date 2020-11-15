@@ -1,0 +1,15 @@
+O
+B_Yellow
+I_Yellow
+B_Red
+I_Red
+B_Purple
+I_Purple
+B_Green
+I_Green
+B_Gray
+I_Gray
+B_Cyan
+I_Cyan
+B_Blue
+I_Blue
