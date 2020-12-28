@@ -1,0 +1,17 @@
+--2020-12-08 19:43:24--  https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_
+Resolving drive.google.com (drive.google.com)... 216.58.200.46, 2404:6800:4008:800::200e
+Connecting to drive.google.com (drive.google.com)|216.58.200.46|:443... connected.
+HTTP request sent, awaiting response... 302 Moved Temporarily
+Location: https://doc-0k-9o-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/oj4q19mpd6rjdvv5mq19cq60o5t8oe75/1607427750000/02847987870453524430/*/1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_ [following]
+Warning: wildcards not supported in HTTP.
+--2020-12-08 19:43:26--  https://doc-0k-9o-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/oj4q19mpd6rjdvv5mq19cq60o5t8oe75/1607427750000/02847987870453524430/*/1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_
+Resolving doc-0k-9o-docs.googleusercontent.com (doc-0k-9o-docs.googleusercontent.com)... 216.58.200.225, 2404:6800:4008:802::2001
+Connecting to doc-0k-9o-docs.googleusercontent.com (doc-0k-9o-docs.googleusercontent.com)|216.58.200.225|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/x-font-ttf]
+Saving to: ‘taipei_sans_tc_beta.ttf’
+
+taipei_sans_tc_beta.ttf                       [<=>                                                                                 ]       0  --.-KB/s               taipei_sans_tc_beta.ttf                       [ <=>                                                                                ]  16.01M  42.8MB/s               taipei_sans_tc_beta.ttf                       [  <=>                                                                               ]  19.70M  48.3MB/s    in 0.4s    
+
+2020-12-08 19:43:28 (48.3 MB/s) - ‘taipei_sans_tc_beta.ttf’ saved [20659344]
+
