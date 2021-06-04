@@ -2,6 +2,7 @@ import itertools
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.switch_backend('Agg')
 from sklearn.linear_model import SGDClassifier # 下次做投影片講這個
 from sklearn.linear_model import SGDRegressor
 from sklearn.pipeline import make_pipeline
@@ -11,11 +12,11 @@ from sklearn.decomposition import PCA # 下次做投影片講這個
 from matplotlib.font_manager import FontProperties
 myfont = FontProperties(fname=r'./taipei_sans_tc_beta.ttf')
 
-
-train_title = ['圓方2013', '圓方2014', '圓方2016', '長鴻2012', '長鴻2013', '長鴻2014']
-train_X = np.array([np.nan_to_num(pd.read_excel('train.xlsx', sheet_name=i, header=None).to_numpy()).flatten() for i in range(2, 8, 1)])
-train_Y = np.array([0, 0, 1, 0, 0, 1])
-
+df = pd.read_excel('train_timeseries.xlsx', index_col=None)
+feature_names = df.columns
+company_names = df.to_numpy()[:,0]
+train_X = df.to_numpy()[:,1:-1]
+train_Y = df.to_numpy()[:,-1]
 
 # clf = make_pipeline(StandardScaler(),
 #                     SGDRegressor(max_iter=100, verbose=1))
@@ -39,23 +40,40 @@ pca.fit(train_X)
 # df.to_excel('tmp.xlsx')
 
 clf = make_pipeline(StandardScaler(),
-                    SGDRegressor(max_iter=100, verbose=1))
-a = clf.fit(pca.transform(train_X), train_Y)
+                    SGDRegressor(max_iter=100, verbose=0))
+a = clf.fit(train_X, train_Y)
 
-points = np.array(list(itertools.product(np.arange(-15, 16, 0.1), np.arange(-5, 16, 0.1))))
-preds = a.predict(points)
+ress = zip(feature_names[1:-1], clf.named_steps['sgdregressor'].coef_)
+for r in ress:
+    #print(r)
+    pass
 
-cs = []
-for p, pred in zip(points, preds):
-    weight = max(0, min(255, int(pred * 255)))
-    print('#{:02x} {:02x} {:02x}'.format(weight, weight, weight))
-    cs.append('#{:02x}{:02x}{:02x}'.format(weight, weight, weight))
+df_test = pd.read_excel('test_timeseries.xlsx', index_col=None)
+test_X = df_test.to_numpy()[:,1:-1]
 
-for idx, point in enumerate(pca.transform(train_X)):
+for x, y in zip(company_names, a.predict(train_X)):
+    print(x, y)
+
+print('\"必翔106\" without change', a.predict(test_X)[0])
+print("\"鴻友104\" without change", a.predict(test_X)[1])
+exit()
+
+for idx, point in enumerate(pca.transform(train_X[8:10])):
     plt.scatter(point[0], point[1], c=('b' if train_Y[idx] == 0 else 'r'))
-    plt.annotate(train_title[idx], (point[0], point[1]), c='#ffffff' if train_Y[idx] == 0 else 'b', fontproperties=myfont)
+    plt.annotate(company_names[idx+8], (point[0], point[1]), c='#000000' if train_Y[idx] == 0 else 'b', fontproperties=myfont)
 
-plt.scatter(points[:, 0], points[:, 1], s=1, c=cs, alpha=0.5)
+
+
+# points = np.array(list(itertools.product(np.arange(-9, -4, 0.01), np.arange(74, 76, 0.01))))
+# preds = a.predict(points)
+
+# cs = []
+# for p, pred in zip(points, preds):
+#     weight = max(0, min(255, int(pred * 255)))
+#     print('#{:02x} {:02x} {:02x}'.format(weight, weight, weight))
+#     cs.append('#{:02x}{:02x}{:02x}'.format(weight, weight, weight))
+
+# plt.scatter(points[:, 0], points[:, 1], s=1, c=cs, alpha=0.5)
 
 
 plt.savefig('test.png')
